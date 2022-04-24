@@ -22,11 +22,7 @@ module.exports = {
       return
     }
 
-    const boardVault = await getBoardVault(
-      program,
-      board.publicKey,
-      board.boardVaultBump
-    )
+    const boardVault = await getBoardVault(program, parseInt(boardId, 10))
 
     info(`Board ID: ${boardId}`)
     info(`Board Public Key: ${board.publicKey}`)
