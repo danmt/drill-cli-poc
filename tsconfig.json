@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": false,
     "experimentalDecorators": true,
     "lib": [
       "es2015",
@@ -23,6 +22,8 @@
     "declaration": true,
     "declarationDir": "build/types",
     "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

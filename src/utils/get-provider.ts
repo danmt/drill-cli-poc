@@ -5,7 +5,7 @@ import { SolanaConfig } from './get-solana-config'
 export const getProvider = async (
   config: SolanaConfig
 ): Promise<AnchorProvider> => {
-  const secretKey = await import(config.keypairPath)
+  const secretKey = (await import(config.keypairPath)).default
   const keypair = Keypair.fromSecretKey(new Uint8Array(secretKey))
   const connection = new Connection(config.rpcUrl, config.commitment)
   const wallet = new Wallet(keypair)

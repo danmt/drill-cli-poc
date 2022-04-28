@@ -1,6 +1,7 @@
 import { GluegunToolbox } from 'gluegun'
 import { getProgram, getSolanaConfig, getProvider } from '../utils'
 import { getBoard, getBoardVault } from '../state'
+import { Octokit } from '@octokit/rest'
 
 module.exports = {
   name: 'get-board',
@@ -10,21 +11,24 @@ module.exports = {
       print: { info },
     } = toolbox
 
+    const octokit = new Octokit()
     const config = await getSolanaConfig()
     const provider = await getProvider(config)
     const program = getProgram(provider)
 
-    const boardId = parameters.first
-    const board = await getBoard(program, parseInt(boardId, 10))
+    const [owner, repoName] = parameters.first.split('/')
+    const repo = await octokit.rest.repos.get({ owner, repo: repoName })
+    const boardId = repo.data.id
+    const board = await getBoard(program, boardId)
 
     if (board === null) {
       info(`Board not found.`)
       return
     }
 
-    const boardVault = await getBoardVault(program, parseInt(boardId, 10))
+    const boardVault = await getBoardVault(program, boardId)
 
-    info(`Board ID: ${boardId}`)
+    info(`Board: "${owner}/${repoName}" (${boardId})`)
     info(`Board Public Key: ${board.publicKey}`)
     info(`Authority: ${board.authority}`)
     info(`Accepted Mint: ${board.acceptedMint}`)

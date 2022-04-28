@@ -2,6 +2,7 @@ import { BN } from '@project-serum/anchor'
 import { PublicKey } from '@solana/web3.js'
 import { GluegunToolbox } from 'gluegun'
 import { getProgram, getSolanaConfig, getProvider } from '../utils'
+import { Octokit } from '@octokit/rest'
 
 module.exports = {
   name: 'create-board',
@@ -11,18 +12,22 @@ module.exports = {
       print: { info },
     } = toolbox
 
+    const octokit = new Octokit()
     const config = await getSolanaConfig()
     const provider = await getProvider(config)
     const program = getProgram(provider)
 
-    const boardId = parameters.first
+    const [owner, repoName] = parameters.first.split('/')
     const lockTime = parameters.second
     const acceptedMint = parameters.third
 
-    info(`Creating board ${boardId}`)
+    const repo = await octokit.rest.repos.get({ owner, repo: repoName })
+    const boardId = repo.data.id
+
+    info(`Creating board "${owner}/${repoName}" (${boardId}).`)
 
     const signature = await program.methods
-      .initializeBoard(parseInt(boardId, 10), new BN(lockTime))
+      .initializeBoard(boardId, new BN(lockTime))
       .accounts({
         acceptedMint: new PublicKey(acceptedMint),
         authority: provider.wallet.publicKey,
@@ -33,6 +38,6 @@ module.exports = {
 
     await provider.connection.confirmTransaction(signature, 'confirmed')
 
-    info(`Board (ID:${boardId}) created.`)
+    info(`Board "${owner}/${repoName}" (${boardId}).`)
   },
 }
