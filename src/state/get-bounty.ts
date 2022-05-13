@@ -1,6 +1,6 @@
 import { BN, Program } from '@project-serum/anchor'
 import { PublicKey } from '@solana/web3.js'
-import { DrillProgramPoc } from '../program/drill_program_poc'
+import { Drill } from '../program/drill'
 
 export interface Bounty {
   publicKey: PublicKey
@@ -9,14 +9,12 @@ export interface Bounty {
   bountyHunter: string | null
   id: number
   bountyVaultBump: number
-  claimedAt: Date | null
   closedAt: Date | null
-  isClaimed: boolean
   isClosed: boolean
 }
 
 export const getBounty = async (
-  program: Program<DrillProgramPoc>,
+  program: Program<Drill>,
   boardId: number,
   bountyId: number
 ): Promise<Bounty | null> => {
@@ -50,13 +48,9 @@ export const getBounty = async (
     bountyBump: bountyAccount.bountyBump,
     bountyHunter: bountyAccount.bountyHunter,
     bountyVaultBump: bountyAccount.bountyVaultBump,
-    claimedAt: bountyAccount.claimedAt
-      ? new Date(bountyAccount.claimedAt.toNumber() * 1000)
-      : null,
     closedAt: bountyAccount.closedAt
       ? new Date(bountyAccount.closedAt.toNumber() * 1000)
       : null,
-    isClaimed: bountyAccount.isClaimed,
     isClosed: bountyAccount.isClosed,
   }
 }

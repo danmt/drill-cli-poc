@@ -1,10 +1,10 @@
 import { BN, Program } from '@project-serum/anchor'
 import { Account, getAccount } from '@solana/spl-token'
 import { PublicKey } from '@solana/web3.js'
-import { DrillProgramPoc } from '../program/drill_program_poc'
+import { Drill } from '../program/drill'
 
 export const getBountyVault = async (
-  program: Program<DrillProgramPoc>,
+  program: Program<Drill>,
   boardId: number,
   bountyId: number
 ): Promise<Account> => {

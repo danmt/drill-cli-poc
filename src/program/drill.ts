@@ -1,6 +1,6 @@
-export type DrillProgramPoc = {
+export type Drill = {
   version: '0.1.0'
-  name: 'drill_program_poc'
+  name: 'drill'
   instructions: [
     {
       name: 'initializeBoard'
@@ -534,13 +534,8 @@ export type DrillProgramPoc = {
           isSigner: false
         },
         {
-          name: 'boardAuthority'
-          isMut: true
-          isSigner: false
-        },
-        {
           name: 'authority'
-          isMut: false
+          isMut: true
           isSigner: true
         },
         {
@@ -617,14 +612,6 @@ export type DrillProgramPoc = {
             type: 'u32'
           },
           {
-            name: 'bountyBump'
-            type: 'u8'
-          },
-          {
-            name: 'bountyVaultBump'
-            type: 'u8'
-          },
-          {
             name: 'bountyHunter'
             type: {
               option: 'string'
@@ -641,14 +628,12 @@ export type DrillProgramPoc = {
             type: 'bool'
           },
           {
-            name: 'claimedAt'
-            type: {
-              option: 'i64'
-            }
+            name: 'bountyBump'
+            type: 'u8'
           },
           {
-            name: 'isClaimed'
-            type: 'bool'
+            name: 'bountyVaultBump'
+            type: 'u8'
           }
         ]
       }
@@ -663,9 +648,9 @@ export type DrillProgramPoc = {
   ]
 }
 
-export const IDL: DrillProgramPoc = {
+export const IDL: Drill = {
   version: '0.1.0',
-  name: 'drill_program_poc',
+  name: 'drill',
   instructions: [
     {
       name: 'initializeBoard',
@@ -1199,13 +1184,8 @@ export const IDL: DrillProgramPoc = {
           isSigner: false,
         },
         {
-          name: 'boardAuthority',
-          isMut: true,
-          isSigner: false,
-        },
-        {
           name: 'authority',
-          isMut: false,
+          isMut: true,
           isSigner: true,
         },
         {
@@ -1282,14 +1262,6 @@ export const IDL: DrillProgramPoc = {
             type: 'u32',
           },
           {
-            name: 'bountyBump',
-            type: 'u8',
-          },
-          {
-            name: 'bountyVaultBump',
-            type: 'u8',
-          },
-          {
             name: 'bountyHunter',
             type: {
               option: 'string',
@@ -1306,14 +1278,12 @@ export const IDL: DrillProgramPoc = {
             type: 'bool',
           },
           {
-            name: 'claimedAt',
-            type: {
-              option: 'i64',
-            },
+            name: 'bountyBump',
+            type: 'u8',
           },
           {
-            name: 'isClaimed',
-            type: 'bool',
+            name: 'bountyVaultBump',
+            type: 'u8',
           },
         ],
       },

@@ -32,7 +32,7 @@ module.exports = {
       parseInt(bountyId)
     )
 
-    info(`Bounty: "${owner}/${repoName}/${boardId}`)
+    info(`Bounty: ${owner}/${repoName}/${boardId} (${bountyId})`)
     info(`Bounty Public Key: ${bounty.publicKey}`)
     info(`Bounty Bump: ${bounty.bountyBump}`)
     info(`Bounty Hunter: ${bounty.bountyHunter}`)
@@ -41,9 +41,6 @@ module.exports = {
     info(`Bounty Vault Bump: ${bounty.bountyVaultBump}`)
     if (bounty.isClosed) {
       info(`Bounty Closed At: ${bounty.closedAt}`)
-    }
-    if (bounty.isClaimed) {
-      info(`Bounty Claimed At: ${bounty.claimedAt}`)
     }
   },
 }

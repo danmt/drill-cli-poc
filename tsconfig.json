@@ -7,7 +7,7 @@
       "es2015.promise",
       "es2015.generator",
       "es2015.iterable",
-      "dom"
+      "dom",
     ],
     "module": "commonjs",
     "moduleResolution": "node",

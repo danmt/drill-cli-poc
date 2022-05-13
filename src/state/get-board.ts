@@ -1,6 +1,6 @@
 import { BN, Program } from '@project-serum/anchor'
 import { PublicKey } from '@solana/web3.js'
-import { DrillProgramPoc } from '../program/drill_program_poc'
+import { Drill } from '../program/drill'
 
 export interface Board {
   id: number
@@ -13,7 +13,7 @@ export interface Board {
 }
 
 export const getBoard = async (
-  program: Program<DrillProgramPoc>,
+  program: Program<Drill>,
   boardId: number
 ): Promise<Board | null> => {
   const [boardPublicKey] = await PublicKey.findProgramAddress(

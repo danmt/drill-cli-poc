@@ -1,11 +1,9 @@
 import { AnchorProvider, Program } from '@project-serum/anchor'
-import { DrillProgramPoc, IDL } from '../program/drill_program_poc'
+import { Drill, IDL } from '../program/drill'
 
 // TODO: read programId in some other way
-const programId = '2fg324Gf51Nrp1jzxXETvJmXPEiHz9ybNY1r575MtijW'
+const programId = 'ARp7sigi8EAfyi5omv7jKZTy9NJaQz7Bh6dt4urzFjWt'
 
-export const getProgram = (
-  provider: AnchorProvider
-): Program<DrillProgramPoc> => {
-  return new Program<DrillProgramPoc>(IDL, programId, provider)
+export const getProgram = (provider: AnchorProvider): Program<Drill> => {
+  return new Program<Drill>(IDL, programId, provider)
 }
